@@ -1,52 +1,109 @@
 <?php
-$myPerson = new Person('Elon','Veda',1000000);
-//echo $myPerson->Pay;
-echo '<pre>';
-var_dump($myPerson);
-echo '</pre>';
-class Person {
-    public $LastName = '';
-    public $FirstName = '';
-    public $Pay = 0;
-    public function Person($LastName, $FirstName, $Pay){
-        $this->LastName = $LastName;
-        $this->FirstName = $FirstName;
-        $this->Pay = $Pay;
-    }//end constructor
-}//end person class
-?>
-<?php
-//postback1.php
 if(isset($_POST['submit'])){
-    //echo $_POST['FirstName'];
-    echo '<pre>';
-    var_dump($_POST);
-    echo '</pre>';
-}else{
+  //variables
+  $fromScale = $_POST['fromScale'];
+  $preTemp = (float)$_POST['preTemp'];
+  $toScale = $_POST['toScale'];
+  $postTemp = $preTemp;
+  //Conversions
+  if($fromScale == 'F' && $toScale == 'C'){
+    $postTemp = 5 / 9 * ($preTemp - 32);
+  }elseif($fromScale == 'F' && $toScale == 'K'){
+    $postTemp = 5 / 9 * ($preTemp - 32) + 273;
+  }elseif($fromScale == 'C' && $toScale == 'F'){
+    $postTemp = 9 / 5 * ($preTemp) + 32;
+  }elseif($fromScale == 'C' && $toScale == 'K'){
+    $postTemp = $preTemp + 273;
+  }elseif($fromScale == 'K' && $toScale == 'F'){
+    $postTemp = 9 / 5 * ($preTemp - 273) + 32;
+  }elseif($fromScale == 'K' && $toScale == 'C'){
+    $postTemp = $preTemp - 273;
+  }else{
+    $postTemp = $preTemp;
+  }
+    //page
     echo '
+    <h1>Temperature Converter</h1>
     <form action="" method="post">
-    <p> <label>
-        First Name:<br />
-        <input type="text" name="FirstName" />
+        <p>Select scale to convert from:</p>
+        <label>
+            <select name="fromScale">
+                <option value="">Please Select a Scale</option>
+                <option value="K">Kelvin</option>
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+            </select>
         </label>
     </p>
     <p>
-        <input type="radio" name="FavoriteColor" value="red" /> Red<br />
-        <input type="radio" name="FavoriteColor" value="green" /> Green<br />
-        <input type="radio" name="FavoriteColor" value="blue" /> Blue<br />
-    </p>
-    <p>
-        <input type="checkbox" name="IceCreamToppings[]" value="chocolate" /> Chocholate<br />
-        <input type="checkbox" name="IceCreamToppings[]" value="caramel" /> Caramel<br />
-        <input type="checkbox" name="IceCreamToppings[]" value="butterscotch" /> Butterscotch<br />
-    </p>
-    <p>
+        <p>Enter value to convert:</p>
         <label>
-            <select name="State">
-                <option value="">Please Select a State</option>
-                <option value="WA">Washington</option>
-                <option value="OR">Oregon</option>
-                <option value="CA">California</option>
+        <input type="number" name="preTemp" min="−459.67" max="10000" />
+        </label>
+    </p>
+    </p>
+    <p>Select scale to convert to:</p>
+        <label>
+            <select name="toScale">
+                <option value="">Please Select a Scale</option>
+                <option value="K">Kelvin</option>
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+            </select>
+        </label>
+    </p>
+    <p>
+        <input type="submit" name="submit" value="submit" />
+    </p>
+    </form>
+    ';
+    //output overly complecated
+    if(($fromScale == 'F' && $preTemp < -459.67) || ($fromScale == 'C' && $preTemp < -273.15) || ($fromScale == 'K' && $preTemp < 0)){
+      echo '<h2>';
+      echo round($preTemp, 2);
+      echo '&deg';
+      echo $fromScale;
+      echo ' is below absolute zero.';
+      echo '</h2>';
+    }else {
+      echo '<h2>';
+      echo round($preTemp, 2);
+      echo '&deg';
+      echo $fromScale;
+      echo ' = ';
+      echo round($postTemp, 2);
+      echo '&deg';
+      echo $toScale;
+      echo '</h2>';
+    }
+}else{
+    echo '
+    <h1>Temperature Converter</h1>
+    <form action="" method="post">
+        <p>Select scale to convert from:</p>
+        <label>
+            <select name="fromScale">
+                <option value="">Please Select a Scale</option>
+                <option value="K">Kelvin</option>
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+            </select>
+        </label>
+    </p>
+    <p>
+        <p>Enter value to convert:</p>
+        <label>
+        <input type="number" name="preTemp" min="−459.67" max="10000" />
+        </label>
+    </p>
+    </p>
+    <p>Select scale to convert to:</p>
+        <label>
+            <select name="toScale">
+                <option value="">Please Select a Scale</option>
+                <option value="K">Kelvin</option>
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
             </select>
         </label>
     </p>
