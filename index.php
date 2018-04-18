@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
         <p>Select scale to convert from:</p>
         <label>
             <select name="fromScale">
-                <option value="">Please Select a Scale</option>
+                <option value="">Please select a scale</option>
                 <option value="K">Kelvin</option>
                 <option value="C">Celsius</option>
                 <option value="F">Fahrenheit</option>
@@ -45,7 +45,7 @@ if(isset($_POST['submit'])){
     <p>Select scale to convert to:</p>
         <label>
             <select name="toScale">
-                <option value="">Please Select a Scale</option>
+                <option value="">Please select a scale</option>
                 <option value="K">Kelvin</option>
                 <option value="C">Celsius</option>
                 <option value="F">Fahrenheit</option>
@@ -83,7 +83,7 @@ if(isset($_POST['submit'])){
         <p>Select scale to convert from:</p>
         <label>
             <select name="fromScale">
-                <option value="">Please Select a Scale</option>
+                <option value="">Please select a scale</option>
                 <option value="K">Kelvin</option>
                 <option value="C">Celsius</option>
                 <option value="F">Fahrenheit</option>
@@ -100,7 +100,7 @@ if(isset($_POST['submit'])){
     <p>Select scale to convert to:</p>
         <label>
             <select name="toScale">
-                <option value="">Please Select a Scale</option>
+                <option value="">Please select a scale</option>
                 <option value="K">Kelvin</option>
                 <option value="C">Celsius</option>
                 <option value="F">Fahrenheit</option>
